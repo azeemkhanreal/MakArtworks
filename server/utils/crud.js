@@ -38,9 +38,9 @@ const updateOne = (model) => async (req, res) => {
 const removeOne = (model) => async (req, res) => {
   try {
     const doc = await model.findByIdAndRemove(req.params.id);
-    res.status(201).json(doc);
+    res.status(201).json({ ok: 1 });
   } catch (error) {
-    res.status(500).json({ ok: 1 });
+    res.status(500).json({ err: error.message });
   }
 };
 

@@ -4,8 +4,11 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const connect = require("./utils/db");
 const userRouter = require("./resources/users/user.routes");
+const projectRouter = require("./resources/projects/project.routes");
 const { register, login } = require("./utils/auth");
+
 const app = express();
+
 dotenv.config();
 app.use(cors());
 app.use(express.json());
@@ -21,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/v1/users/register/", register);
 app.use("/v1/users/login/", login);
 app.use("/v1/users", userRouter);
+app.use("/v1/projects", projectRouter);
 
 const start = async () => {
   connect();
