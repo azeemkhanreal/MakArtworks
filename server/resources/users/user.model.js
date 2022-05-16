@@ -5,16 +5,16 @@ const userSchema = mongoose.Schema(
   {
     fullname: { type: String, required: true },
     mobile: { type: Number, length: 10 },
-    userid: { type: String, unique: true },
+    username: { type: String, unique: true, required: true },
     email: { type: String, required: true, trim: true, lowercase: true },
     password: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", function (next) {
   if (!this.isModified("password")) return next();
-  await bcrypt.hash(this.password, 8, (err, hash) => {
+  bcrypt.hash(this.password, 8, (err, hash) => {
     if (err) return next(err);
     this.password = hash;
     next();

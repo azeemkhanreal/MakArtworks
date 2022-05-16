@@ -3,7 +3,6 @@ const userControllers = require("./user.controllers");
 const { protect } = require("../../utils/auth");
 
 // http://localhost:8080/v1/users
-
 router
   .route("/")
   .get(protect, userControllers.getAll)

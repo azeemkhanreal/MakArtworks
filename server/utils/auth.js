@@ -14,7 +14,7 @@ const newToken = (user) => {
 };
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, config.SECRET_KEY, (err, payload) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, payload) => {
       if (err) reject(err);
       resolve(payload);
     });
